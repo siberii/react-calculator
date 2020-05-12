@@ -1,0 +1,26 @@
+{  
+  "rules": {
+    "block-opening-brace-space-before": "always",
+    "block-no-empty": null,
+    "color-no-invalid-hex": true,
+    "declaration-colon-space-after": "always",
+    "max-empty-lines": 2,
+    "unit-whitelist": [
+      "%",
+      "s",
+      "ms",
+      "em",
+      "px",
+      "vw",
+      "vh",
+      "rem",
+      "fr",
+      "deg",
+      "turn",
+      "dpi",
+      "dppx",
+      "pt"
+    ]
+  },
+  "extends": ["stylelint-prettier/recommended"]
+}
