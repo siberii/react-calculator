@@ -1,13 +1,22 @@
 .button {
-    border: 1px solid transparent;
-    padding: 8px 18px;
+    font-family: roboto, Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 15px;
     color: white;
-    background: black;
+    background: var(--accent-color);
+    box-sizing: border-box;
+    border: none;
+    padding: 0 16px;
+    min-width: 36px;
+    height: 36px;
+    vertical-align: middle;
+    text-align: center;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
 }
 
 .button:hover {
     cursor: pointer;
-    border: 1px solid grey;
 }
 
 button:focus {

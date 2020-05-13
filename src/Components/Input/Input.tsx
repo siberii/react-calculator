@@ -1,5 +1,5 @@
 import React, {Component, ChangeEvent} from 'react';
-
+import './Input.css'
 interface IInputState {
     //
 }
@@ -14,6 +14,7 @@ export class Input extends Component<IInputProp, IInputState> {
         const {operand, handleOperand} = this.props;
         return (
             <input
+                className='input'
                 type='number'
                 value={operand ? operand : ''}
                 onChange={handleOperand}

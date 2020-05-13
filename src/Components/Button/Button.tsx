@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './Button.css'
+import './Button.css';
 interface IButtonState {
     //
 }
@@ -12,9 +12,18 @@ interface IButtonProp {
 export class Button extends Component<IButtonProp, IButtonState> {
     render(): JSX.Element {
         const {handleClick, value} = this.props;
+        const CLEAR_COLOR = '#D64952';
         return (
             <div>
-                <button className="button" onClick={handleClick}>{value}</button>
+                <button
+                    className='button'
+                    style={{
+                        backgroundColor: value === 'Clear' ? CLEAR_COLOR : ''
+                    }}
+                    onClick={handleClick}
+                >
+                    {value}
+                </button>
             </div>
         );
     }

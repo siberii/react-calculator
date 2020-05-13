@@ -89,20 +89,22 @@ export class Calculator extends React.Component<
                     <div className='content'>
                         <div className='result'>{result}</div>
                         <div className=' sub-group'>
-                            <Input
-                                operand={num1}
-                                handleOperand={this.handleNum1}
-                            />
-                            <Input
-                                operand={num2}
-                                handleOperand={this.handleNum2}
-                            />
+                            <div className='inputs'>
+                                <Input
+                                    operand={num1}
+                                    handleOperand={this.handleNum1}
+                                />
+                                <Input
+                                    operand={num2}
+                                    handleOperand={this.handleNum2}
+                                />
+                            </div>
                             <Button
                                 handleClick={this.handleClear}
                                 value={'Clear'}
                             />
                         </div>
-                        <div className='sub-group'>
+                        <div className='sub-group operators'>
                             <Button
                                 handleClick={this.handleOperator(Sign.Add)}
                                 value={Sign.Add}
