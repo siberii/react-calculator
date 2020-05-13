@@ -2,11 +2,11 @@ import React, {ChangeEvent} from 'react';
 import {Button} from '../Button/Button';
 import {Input} from '../Input/Input';
 import {Sign} from '../Sign';
+import './Calculator.css';
 
 interface ICalculatorState {
     num1: number | null;
     num2: number | null;
-    operator: Sign;
     result: number;
 }
 
@@ -23,7 +23,6 @@ export class Calculator extends React.Component<
         this.state = {
             num1: null,
             num2: null,
-            operator: Sign.Add,
             result: 0
         };
     }
@@ -49,8 +48,7 @@ export class Calculator extends React.Component<
     handleClear = () => {
         this.setState({
             num1: null,
-            num2: null,
-            operator: Sign.Add
+            num2: null
         });
     };
 
@@ -68,7 +66,7 @@ export class Calculator extends React.Component<
                 answer = (num1 as number) * (num2 as number);
                 break;
             case Sign.Divide:
-                if (num2 === 0) {
+                if (!num2) {
                     answer = 0;
                     break;
                 }
@@ -82,33 +80,47 @@ export class Calculator extends React.Component<
     }
 
     render(): JSX.Element {
-        const {num1, num2, operator, result} = this.state;
+        const {num1, num2, result} = this.state;
 
         return (
-            <div>
-                <div>{result}</div>
-                <div>
-                    <Input operand={num1} handleOperand={this.handleNum1} />
-                    <Input operand={num2} handleOperand={this.handleNum2} />
-                    <Button handleClick={this.handleClear} value={'Clear'} />
-                </div>
-                <div>
-                    <Button
-                        handleClick={this.handleOperator(Sign.Add)}
-                        value={Sign.Add}
-                    />
-                    <Button
-                        handleClick={this.handleOperator(Sign.Subtract)}
-                        value={Sign.Subtract}
-                    />
-                    <Button
-                        handleClick={this.handleOperator(Sign.Multiply)}
-                        value={Sign.Multiply}
-                    />
-                    <Button
-                        handleClick={this.handleOperator(Sign.Divide)}
-                        value={Sign.Divide}
-                    />
+            <div className='main'>
+                <div className='modal'>
+                    <div className='title'>Calculator</div>
+                    <div className='content'>
+                        <div className='result'>{result}</div>
+                        <div className=' sub-group'>
+                            <Input
+                                operand={num1}
+                                handleOperand={this.handleNum1}
+                            />
+                            <Input
+                                operand={num2}
+                                handleOperand={this.handleNum2}
+                            />
+                            <Button
+                                handleClick={this.handleClear}
+                                value={'Clear'}
+                            />
+                        </div>
+                        <div className='sub-group'>
+                            <Button
+                                handleClick={this.handleOperator(Sign.Add)}
+                                value={Sign.Add}
+                            />
+                            <Button
+                                handleClick={this.handleOperator(Sign.Subtract)}
+                                value={Sign.Subtract}
+                            />
+                            <Button
+                                handleClick={this.handleOperator(Sign.Multiply)}
+                                value={Sign.Multiply}
+                            />
+                            <Button
+                                handleClick={this.handleOperator(Sign.Divide)}
+                                value={Sign.Divide}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         );

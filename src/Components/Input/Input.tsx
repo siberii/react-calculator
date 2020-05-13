@@ -10,10 +10,6 @@ interface IInputProp {
 }
 
 export class Input extends Component<IInputProp, IInputState> {
-    constructor(props: IInputProp) {
-        super(props);
-    }
-
     render() {
         const {operand, handleOperand} = this.props;
         return (

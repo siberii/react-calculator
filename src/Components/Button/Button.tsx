@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {Sign} from '../Sign';
-
+import './Button.css'
 interface IButtonState {
     //
 }
@@ -11,15 +10,11 @@ interface IButtonProp {
 }
 
 export class Button extends Component<IButtonProp, IButtonState> {
-    constructor(props: IButtonProp) {
-        super(props);
-    }
-
     render(): JSX.Element {
         const {handleClick, value} = this.props;
         return (
             <div>
-                <button onClick={handleClick}>{value}</button>
+                <button className="button" onClick={handleClick}>{value}</button>
             </div>
         );
     }
