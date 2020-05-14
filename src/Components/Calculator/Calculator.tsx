@@ -3,6 +3,7 @@ import {Button} from '../Button/Button';
 import {Sign} from '../Sign';
 import './Calculator.css';
 import {Operands} from '../Operands/Operands';
+import {Maths} from './Maths';
 
 interface ICalculatorState {
     num1: number | null;
@@ -40,8 +41,11 @@ export class Calculator extends React.Component<
     };
 
     handleOperator = (sign: Sign) => () => {
+        const first = this.state.num1 ? this.state.num1 : 0;
+        const second = this.state.num2 ? this.state.num2 : 0;
+
         this.setState({
-            result: this.calculate(sign)
+            result: Maths.calculate(sign, first, second)
         });
     };
 
@@ -52,36 +56,7 @@ export class Calculator extends React.Component<
         });
     };
 
-    private calculate(sign: Sign): number {
-        const firstOperand = this.state.num1 ? this.state.num1 : 0;
-        const secondOperand = this.state.num2 ? this.state.num2 : 0;
-
-        let answer = 0;
-        switch (sign) {
-            case Sign.Add:
-                answer = firstOperand + secondOperand;
-                break;
-            case Sign.Subtract:
-                answer = firstOperand - secondOperand;
-                break;
-            case Sign.Multiply:
-                answer = firstOperand * secondOperand;
-                break;
-            case Sign.Divide:
-                if (!secondOperand) {
-                    answer = 0;
-                    break;
-                }
-                answer = Math.round((firstOperand / secondOperand) * 10) / 10;
-                break;
-            default:
-                break;
-        }
-        return answer;
-    }
-
     render(): JSX.Element {
-
         return (
             <div className='modal'>
                 <div className='title'>Calculator</div>
