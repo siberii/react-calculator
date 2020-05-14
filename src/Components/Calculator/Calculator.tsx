@@ -4,6 +4,7 @@ import {Sign} from '../Sign';
 import './Calculator.css';
 import {Operands} from '../Operands/Operands';
 import {Maths} from './Maths';
+import {Operators} from '../Operators/Operators';
 
 interface ICalculatorState {
     num1: number | null;
@@ -40,9 +41,10 @@ export class Calculator extends React.Component<
         });
     };
 
-    handleOperator = (sign: Sign) => () => {
+    handleOperator = (event: ChangeEvent<HTMLButtonElement>) => {
         const first = this.state.num1 ? this.state.num1 : 0;
         const second = this.state.num2 ? this.state.num2 : 0;
+        const sign = event.target.value as Sign;
 
         this.setState({
             result: Maths.calculate(sign, first, second)
@@ -57,37 +59,24 @@ export class Calculator extends React.Component<
     };
 
     render(): JSX.Element {
+        const {num1, num2, result} = this.state;
+
         return (
             <div className='modal'>
                 <div className='title'>Calculator</div>
                 <div className='content'>
-                    <div className='result'>{this.state.result}</div>
-                    <div className='row'>
+                    <div className='result'>{result}</div>
+                    <div className='row operands'>
                         <Operands
-                            num1={this.state.num1}
-                            num2={this.state.num2}
+                            num1={num1}
+                            num2={num2}
                             handleNum1={this.handleNum1}
                             handleNum2={this.handleNum2}
                         />
                         <Button handleClick={this.handleClear}>Clear</Button>
                     </div>
                     <div className='row operators'>
-                        <Button handleClick={this.handleOperator(Sign.Add)}>
-                            {Sign.Add}
-                        </Button>
-                        <Button
-                            handleClick={this.handleOperator(Sign.Subtract)}
-                        >
-                            {Sign.Subtract}
-                        </Button>
-                        <Button
-                            handleClick={this.handleOperator(Sign.Multiply)}
-                        >
-                            {Sign.Multiply}
-                        </Button>
-                        <Button handleClick={this.handleOperator(Sign.Divide)}>
-                            {Sign.Divide}
-                        </Button>
+                        <Operators handleClick={this.handleOperator} />
                     </div>
                 </div>
             </div>

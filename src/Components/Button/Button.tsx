@@ -1,17 +1,16 @@
-import React, {Component} from 'react';
+import React, {Component, ChangeEvent} from 'react';
 import './Button.css';
 interface IButtonState {
     //
 }
 
 interface IButtonProp {
-    handleClick: () => void;
+    handleClick: (event: any) => void;
 }
 
 export class Button extends Component<IButtonProp, IButtonState> {
     render(): JSX.Element {
-        const {handleClick} = this.props;
-        console.log(this.props.children);
+        const {handleClick, children} = this.props;
 
         return (
             <div>
@@ -19,8 +18,9 @@ export class Button extends Component<IButtonProp, IButtonState> {
                     type='button'
                     className='button'
                     onClick={handleClick}
+                    value={children ? children.toString() : ''}
                 >
-                    {this.props.children}
+                    {children}
                 </button>
             </div>
         );

@@ -1,5 +1,6 @@
 import React, {Component, ChangeEvent} from 'react';
 import './Operand.css'
+import { Sign } from '../../Sign';
 
 
 interface IOperandProp {
