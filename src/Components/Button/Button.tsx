@@ -5,26 +5,35 @@ interface IButtonState {
 }
 
 interface IButtonProp {
-    value: string;
     handleClick: () => void;
 }
 
 export class Button extends Component<IButtonProp, IButtonState> {
     render(): JSX.Element {
-        const {handleClick, value} = this.props;
-        const CLEAR_COLOR = '#D64952';
+        const {handleClick} = this.props;
+        console.log(this.props.children);
+
         return (
             <div>
                 <button
+                    type='button'
                     className='button'
-                    style={{
-                        backgroundColor: value === 'Clear' ? CLEAR_COLOR : ''
-                    }}
                     onClick={handleClick}
                 >
-                    {value}
+                    {this.props.children}
                 </button>
             </div>
         );
+    }
+
+    private getColorStyle(value: string) {
+        const COLOR = '#D64952';
+        const isClear = value === 'Clear';
+
+        const colorStyle = {
+            backgroundColor: isClear ? COLOR : ''
+        };
+
+        return colorStyle;
     }
 }

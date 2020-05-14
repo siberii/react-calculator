@@ -1,8 +1,8 @@
 import React, {ChangeEvent} from 'react';
 import {Button} from '../Button/Button';
-import {Input} from '../Input/Input';
 import {Sign} from '../Sign';
 import './Calculator.css';
+import {Operands} from '../Operands/Operands';
 
 interface ICalculatorState {
     num1: number | null;
@@ -53,25 +53,26 @@ export class Calculator extends React.Component<
     };
 
     private calculate(sign: Sign): number {
-        const {num1, num2} = this.state;
+        const firstOperand = this.state.num1 ? this.state.num1 : 0;
+        const secondOperand = this.state.num2 ? this.state.num2 : 0;
+
         let answer = 0;
         switch (sign) {
             case Sign.Add:
-                answer = (num1 as number) + (num2 as number);
+                answer = firstOperand + secondOperand;
                 break;
             case Sign.Subtract:
-                answer = (num1 as number) - (num2 as number);
+                answer = firstOperand - secondOperand;
                 break;
             case Sign.Multiply:
-                answer = (num1 as number) * (num2 as number);
+                answer = firstOperand * secondOperand;
                 break;
             case Sign.Divide:
-                if (!num2) {
+                if (!secondOperand) {
                     answer = 0;
                     break;
                 }
-                answer =
-                    Math.round(((num1 as number) / (num2 as number)) * 10) / 10;
+                answer = Math.round((firstOperand / secondOperand) * 10) / 10;
                 break;
             default:
                 break;
@@ -80,48 +81,38 @@ export class Calculator extends React.Component<
     }
 
     render(): JSX.Element {
-        const {num1, num2, result} = this.state;
 
         return (
-            <div className='main'>
-                <div className='modal'>
-                    <div className='title'>Calculator</div>
-                    <div className='content'>
-                        <div className='result'>{result}</div>
-                        <div className=' sub-group'>
-                            <div className='inputs'>
-                                <Input
-                                    operand={num1}
-                                    handleOperand={this.handleNum1}
-                                />
-                                <Input
-                                    operand={num2}
-                                    handleOperand={this.handleNum2}
-                                />
-                            </div>
-                            <Button
-                                handleClick={this.handleClear}
-                                value={'Clear'}
-                            />
-                        </div>
-                        <div className='sub-group operators'>
-                            <Button
-                                handleClick={this.handleOperator(Sign.Add)}
-                                value={Sign.Add}
-                            />
-                            <Button
-                                handleClick={this.handleOperator(Sign.Subtract)}
-                                value={Sign.Subtract}
-                            />
-                            <Button
-                                handleClick={this.handleOperator(Sign.Multiply)}
-                                value={Sign.Multiply}
-                            />
-                            <Button
-                                handleClick={this.handleOperator(Sign.Divide)}
-                                value={Sign.Divide}
-                            />
-                        </div>
+            <div className='modal'>
+                <div className='title'>Calculator</div>
+                <div className='content'>
+                    <div className='result'>{this.state.result}</div>
+                    <div className='row'>
+                        <Operands
+                            num1={this.state.num1}
+                            num2={this.state.num2}
+                            handleNum1={this.handleNum1}
+                            handleNum2={this.handleNum2}
+                        />
+                        <Button handleClick={this.handleClear}>Clear</Button>
+                    </div>
+                    <div className='row operators'>
+                        <Button handleClick={this.handleOperator(Sign.Add)}>
+                            {Sign.Add}
+                        </Button>
+                        <Button
+                            handleClick={this.handleOperator(Sign.Subtract)}
+                        >
+                            {Sign.Subtract}
+                        </Button>
+                        <Button
+                            handleClick={this.handleOperator(Sign.Multiply)}
+                        >
+                            {Sign.Multiply}
+                        </Button>
+                        <Button handleClick={this.handleOperator(Sign.Divide)}>
+                            {Sign.Divide}
+                        </Button>
                     </div>
                 </div>
             </div>
