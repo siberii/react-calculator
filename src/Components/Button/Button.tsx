@@ -12,13 +12,15 @@ export class Button extends Component<IButtonProp, IButtonState> {
     render(): JSX.Element {
         const {handleClick, children} = this.props;
 
+        const value = children ? children.toString() : '';
         return (
             <div>
                 <button
                     type='button'
                     className='button'
                     onClick={handleClick}
-                    value={children ? children.toString() : ''}
+                    value={value}
+                    style={this.getColorStyle(value)}
                 >
                     {children}
                 </button>

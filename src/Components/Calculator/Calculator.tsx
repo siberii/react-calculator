@@ -54,7 +54,8 @@ export class Calculator extends React.Component<
     handleClear = () => {
         this.setState({
             num1: null,
-            num2: null
+            num2: null,
+            result: 0
         });
     };
 
